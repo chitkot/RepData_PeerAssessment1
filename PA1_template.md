@@ -1,9 +1,5 @@
 # Reproducible Research: Peer Assignment 1
 
-output:
-  html_document: 
-    keep_md: true
-
 
 ## Loading and preprocessing the data
 
@@ -124,7 +120,7 @@ NArows <- sum(!complete.cases(activity))
 Total number of rows with missing values: 2304
 
 
-### 2. Strategy for filling in missing values in the dataset
+### 2. Strategy for filling in missing data
 
 Using  the aggregate() function, I compute the average number of steps by 5-minute interval.  
 I call this variable "MeanStepsInterval". These are the values that I will use to fill missing data in.
