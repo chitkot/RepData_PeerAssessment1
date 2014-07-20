@@ -138,7 +138,7 @@ names(meanInterval)[names(meanInterval)==&quot;steps&quot;] &lt;- &quot;MeanStep
 <h3>3. Creating new dataset equal to original dataset but with missing data filled in</h3>
 <p>I Merge dataset containing average number of steps by 5-minute interval with the original dataset with missing values.</p>
 <pre class="r"><code>activityImpute &lt;- merge(activity, meanInterval, all.x=TRUE)</code></pre>
-<p>I Replace NAs in variable “steps” with with average values from variable “MeanStepsInterval”; then I drop “MeanStepsInterval” variable.</p>
+<p>I Replace NAs in variable “steps” with average values from variable “MeanStepsInterval”; then I drop “MeanStepsInterval” variable.</p>
 <pre class="r"><code>activityImpute$steps[is.na(activityImpute$steps)] &lt;- activityImpute$MeanStepsInterval</code></pre>
 <pre><code>## Warning: number of items to replace is not a multiple of replacement
 ## length</code></pre>
@@ -149,8 +149,8 @@ names(meanInterval)[names(meanInterval)==&quot;steps&quot;] &lt;- &quot;MeanStep
 <pre class="r"><code>sum(!complete.cases(activityImpute)) # Check that there are no missing values</code></pre>
 <pre><code>## [1] 0</code></pre>
 </div>
-<div id="histogram-mean-and-median-of-total-number-of-steps-taken-per-day" class="section level3">
-<h3>4. Histogram, mean, and median of total number of steps taken per day</h3>
+<div id="histogram-mean-and-median-of-total-number-of-steps-taken-per-day-after-imputing-missing-data" class="section level3">
+<h3>4. Histogram, mean, and median of total number of steps taken per day, after imputing missing data</h3>
 <p>I Compute total steps per day and create a histogram.</p>
 <pre class="r"><code>activityImputeTotal &lt;- aggregate(steps ~ date, activityImpute, sum)
 hist(activityImputeTotal$steps, breaks = 10, 
@@ -166,8 +166,8 @@ medianImpute &lt;- median(activityImputeTotal$steps) # Median</code></pre>
 <p>Conclusion: Yes, the mean and median values obtained after imputing missing values differ from the values in the first part of the assignment. The values computed from the imputed data are lower than those from the original non-imputed data. Therefore, imputing missing data has decreased the estimates of the total daily number of steps.</p>
 </div>
 </div>
-<div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
-<h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+<div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends-using-imputed-dataset" class="section level2">
+<h2>Are there differences in activity patterns between weekdays and weekends (using imputed dataset)?</h2>
 <div id="creating-factor-variable-with-two-levels-weekday-and-weekend" class="section level3">
 <h3>1. Creating factor variable with two levels: “weekday” and “weekend”</h3>
 <p>I use the weekdays() functions and create a new variable “day”, with days recoded as weekday or weekend</p>
@@ -181,8 +181,8 @@ activityImpute$day[weekdays(activityImpute$date)==&quot;Sunday&quot;] &lt;- &quo
 
 activityImpute$day &lt;- factor(activityImpute$day, levels=c(&quot;weekday&quot;,&quot;weekend&quot;))</code></pre>
 </div>
-<div id="panel-plot-contining-a-time-series-plot-of-5-minute-intevals-and-average-number-of-steps" class="section level3">
-<h3>2. Panel plot contining a time series plot of 5-minute intevals and average number of steps</h3>
+<div id="panel-plot-contining-a-time-series-plot-of-5-minute-intevals-and-average-number-of-steps-after-imputing-missing-data" class="section level3">
+<h3>2. Panel plot contining a time series plot of 5-minute intevals and average number of steps, after imputing missing data</h3>
 <p>First, I use aggregate() function to compute total steps per weekday/weekend and interval. Then I use the lattice library to create the panel plot.</p>
 <pre class="r"><code>timeSeriesDay &lt;- aggregate(steps ~ day + interval, activityImpute, mean ) 
 library(lattice)

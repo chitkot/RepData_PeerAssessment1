@@ -145,7 +145,7 @@ I Merge dataset containing average number of steps by 5-minute interval with the
 activityImpute <- merge(activity, meanInterval, all.x=TRUE)
 ```
       
-I Replace NAs in variable "steps" with with average values from variable "MeanStepsInterval"; then I drop "MeanStepsInterval" variable. 
+I Replace NAs in variable "steps" with average values from variable "MeanStepsInterval"; then I drop "MeanStepsInterval" variable. 
 
 
 ```r
@@ -181,7 +181,7 @@ sum(!complete.cases(activityImpute)) # Check that there are no missing values
 ## [1] 0
 ```
 
-### 4. Histogram, mean, and median of total number of steps taken per day
+### 4. Histogram, mean, and median of total number of steps taken per day, after imputing missing data
 
 I Compute total steps per day and create a histogram.
 
@@ -210,7 +210,7 @@ Median total number of steps taken per day: 10395
 
 Conclusion: Yes, the mean and median values obtained after imputing missing values differ from the values in the first part of the assignment. The values computed from the imputed data are lower than those from the original non-imputed data. Therefore, imputing missing data has decreased the estimates of the total daily number of steps. 
 
-## Are there differences in activity patterns between weekdays and weekends?
+## Are there differences in activity patterns between weekdays and weekends (using imputed dataset)?
 
 ### 1. Creating factor variable with two levels: "weekday" and "weekend"
 
@@ -229,7 +229,7 @@ activityImpute$day[weekdays(activityImpute$date)=="Sunday"] <- "weekend"
 activityImpute$day <- factor(activityImpute$day, levels=c("weekday","weekend"))
 ```
 
-### 2. Panel plot contining a time series plot of 5-minute intevals and average number of steps
+### 2. Panel plot contining a time series plot of 5-minute intevals and average number of steps, after imputing missing data
 
 First, I use aggregate() function to compute total steps per weekday/weekend and interval.
 Then I use the lattice library to create the panel plot.
